@@ -1,6 +1,12 @@
 var express = require('express');
 const jwt = require('jsonwebtoken');
+const config = require('../config');
 var router = express.Router();
+
+const { jwtSigningKeys } = config
+const { jwtVerifyOptions } = config
+const fs = require('fs');
+
 
 /* GET users listing. */
 router.get('/all', function(req, res, next) {
@@ -18,7 +24,7 @@ router.get('/all', function(req, res, next) {
 
 
 const checkToken = (req, res, next) => {
-    const header = req.headers['authorization'];
+	const header = req.headers['authorization'];
 
     if(typeof header !== 'undefined') {
 
@@ -36,7 +42,10 @@ const checkToken = (req, res, next) => {
 
 
 router.get('/certs', checkToken, function(req, res, next) {
-	jwt.verify(req.token, 'privatekey', (err, authorizedData) => {
+
+	pubKey = fs.readFileSync(jwtSigningKeys['pubKey']);
+
+	jwt.verify(req.token, pubKey, jwtVerifyOptions, (err, authorizedData) => {
 		if(err){
 			//If error send Forbidden (403)
 			console.log('ERROR: Could not connect to the protected route');
