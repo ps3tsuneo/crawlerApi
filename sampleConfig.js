@@ -18,6 +18,22 @@ var config = {
             organization: 'dummy',
             telf: 'dummy',
             title: 'dummy'
+        },
+        jwtSigningKeys: {
+            privKey: 'path2key/private.pem',
+            pubKey: 'path2key/public.pem'
+        },
+        jwtSigningOptions: {
+            issuer: "UNDomains CA",
+            subject:  "DB crawler access",
+            expiresIn:  "12h",
+            algorithm:  "RS256"
+        },
+        jwtVerifyOptions : {
+            issuer: "UNDomains CA",
+            subject:  "DB crawler access",
+            expiresIn:  "12h",
+            algorithm:  ["RS256"]
         }
 };
 
