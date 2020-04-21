@@ -22,14 +22,9 @@ router.post('/user/login', (req, res, next) => {
 
 
   privatekey = fs.readFileSync(jwtSigningKeys['privKey']);
-  console.log("Fuicktap Pandey")
-  console.log(jwtSigningKeys['privKey'])
-  console.log(privatekey)
 
   //checking to make sure the user entered the correct username/password combo
   if(username === user.username && password === user.password) { 
-       console.log("Clownapggedon!!")
-       console.log(privatekey)
       //if user log in success, generate a JWT token for the user with a secret key
       jwt.sign({jsonPayload}, privatekey, jwtSigningOptions,(err, token) => {
           if(err) { console.log(err) }    

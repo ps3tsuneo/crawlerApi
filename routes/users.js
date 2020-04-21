@@ -10,7 +10,6 @@ const fs = require('fs');
 
 /* GET users listing. */
 router.get('/all', function(req, res, next) {
-	console.log("Into the journey")
 	res.locals.connection.query('select * from Thomas', function (error, results, fields) {
 	  	if(error){
 	  		res.send(JSON.stringify({"status": 500, "error": error, "response": null})); 
