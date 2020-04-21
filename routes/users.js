@@ -43,6 +43,7 @@ router.get('/certs', checkToken, function(req, res, next) {
 			res.sendStatus(403);
 		} else {
 			//If token is successfully verified, we can send the autorized data 
+			console.log(authorizedData)
 			res.locals.connection.query('select * from certDomFqdnView', function (error, results, fields) {
 				if(error){
 					res.send(JSON.stringify({"status": 500, "error": error, "response": null})); 
